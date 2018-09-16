@@ -19,18 +19,25 @@ import java.util.logging.Logger;
  */
 public class DBConnection {
 
+    public static String url = "jdbc:mysql://localhost:3306/student_manager";
+    public static String user = "root";
+    public static String pass = "";
+    public static String driver = "com.mysql.jdbc.Driver";
+
     public static Connection getConnection() {
         Connection connection = null;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/student_manager", "root", "");
-        } catch (Exception e) {
-            System.out.println(e);
+         try {
+            Class.forName(driver);
+            return DriverManager.getConnection(url, user, pass);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return connection;
+        return null;
     }
-    
-     public static void close(ResultSet rs, Statement st, Connection cnn) {
+
+    public static void close(ResultSet rs, Statement st, Connection cnn) {
 
         try {
             if (rs != null && !rs.isClosed()) {

@@ -82,6 +82,9 @@ public class StudentDAO {
         } catch (SQLException ex) {
             Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        finally {
+            conn.close(rs, ps, connection);
+        }
         return list;
 
     }
