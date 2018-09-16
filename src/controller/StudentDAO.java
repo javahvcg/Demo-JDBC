@@ -70,8 +70,8 @@ public class StudentDAO {
                 int room_id = rs.getInt("room_id");
                 String name = rs.getString("name");
                 String dob = rs.getString("dob");
-                Student student = new Student(id, room_id, name, dob);
-                Room room = new Room(room_id, dob);
+                Room room = new Room(3, "SG New");
+                Student student = new Student(id, room_id, name, dob, room);
                 list.add(student);
                 System.out.println(student.toString());                
             }

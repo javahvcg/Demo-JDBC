@@ -14,16 +14,27 @@ public class Student {
     private int room_id;
     private String name;
     private String dob;
+    private Room room;
+    
+//
+//    public Student(int id, int room_id, String name, String dob) {
+//        this.id = id;
+//        this.room_id = room_id;
+//        this.name = name;
+//        this.dob = dob;
+//    }    
+//    
     
 
-    public Student(int id, int room_id, String name, String dob) {
+    public Student() {
+    }
+
+    public Student(int id, int room_id, String name, String dob, Room room) {
         this.id = id;
         this.room_id = room_id;
         this.name = name;
         this.dob = dob;
-    }    
-
-    public Student() {
+        this.room = room;
     }
 
 
@@ -59,11 +70,17 @@ public class Student {
         this.dob = dob;
     }
 
-    @Override
-    public String toString() {
-        return "Student{" + "id=" + id + ", room_id=" + room_id + ", name=" + name + ", dob=" + dob + '}';
+    public Room getRoom() {
+        return room;
     }
 
-   
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" + "id=" + id + ", room_id=" + room_id + ", name=" + name + ", dob=" + dob + ", room=" + room + '}';
+    }
 
 }
