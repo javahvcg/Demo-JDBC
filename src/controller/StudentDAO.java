@@ -32,8 +32,11 @@ public class StudentDAO {
         DBConnection conn = new DBConnection();
         connection = conn.getConnection();
         try {
-            String sql = "insert into student(id, room_id, name, dob) values (?,?,?,?)";
-            ps = connection.prepareStatement(sql);
+//            String sql1 = "insert into room(room_id , clan) values(2,'HaNoi')";
+//            ps = connection.prepareStatement(sql1);
+
+            String sql2 = "insert into student(id, room_id, name, dob) values (?,?,?,?)";
+            ps = connection.prepareStatement(sql2);
             ps.setInt(1, 2);
             ps.setInt(2, 2);
             ps.setString(3, "VaneLove");
@@ -70,10 +73,11 @@ public class StudentDAO {
                 int room_id = rs.getInt("room_id");
                 String name = rs.getString("name");
                 String dob = rs.getString("dob");
-                Room room = new Room(3, "SG New");
+                String clan = rs.getString("clan");
+                Room room = new Room(room_id, clan);
                 Student student = new Student(id, room_id, name, dob, room);
                 list.add(student);
-                System.out.println(student.toString());                
+                System.out.println(student.toString());
             }
         } catch (SQLException ex) {
             Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);

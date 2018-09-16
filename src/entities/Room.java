@@ -30,13 +30,14 @@ public class Room {
         this.room_id = room_id;
     }
 
-    public String getName() {
+    public String getClan() {
         return clan;
     }
 
-    public void setName(String name) {
-        this.clan = name;
+    public void setClan(String clan) {
+        this.clan = clan;
     }
+
 
     @Override
     public String toString() {
