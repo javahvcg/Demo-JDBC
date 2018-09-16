@@ -75,7 +75,7 @@ public class StudentDAO {
                 String dob = rs.getString("dob");
                 String clan = rs.getString("clan");
                 Room room = new Room(room_id, clan);
-                Student student = new Student(id, room_id, name, dob, room);
+                Student student = new Student(id, name, dob, room);
                 list.add(student);
                 System.out.println(student.toString());
             }

@@ -19,6 +19,12 @@ public class Room {
         this.clan = clan;
     }
 
+    public Room(String clan) {
+        this.clan = clan;
+    }
+    
+    
+
     public Room() {
     }
 
@@ -28,14 +34,6 @@ public class Room {
 
     public void setRoom_id(int room_id) {
         this.room_id = room_id;
-    }
-
-    public String getClan() {
-        return clan;
-    }
-
-    public void setClan(String clan) {
-        this.clan = clan;
     }
 
 
