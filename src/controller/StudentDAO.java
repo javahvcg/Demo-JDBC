@@ -86,9 +86,20 @@ public class StudentDAO {
 
     }
 
-    public static void main(String[] args) {
-        StudentDAO dao = new StudentDAO();
-        Student student = new Student();
-        dao.getAll();
+//    public static void main(String[] args) {
+//        StudentDAO dao = new StudentDAO();
+//        Student student = new Student();
+//        dao.getAll();
+//    }
+    public boolean updateById() {
+        return false;
+    }
+
+    public boolean deleteById() {
+        return false;
+    }
+
+    public Student getById(String id) {
+        return null;
     }
 }
