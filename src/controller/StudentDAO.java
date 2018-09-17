@@ -155,7 +155,6 @@ public class StudentDAO {
                 Room room = new Room(room_id, clan);
                 student = new Student(stId, name, dob, room);
                 System.out.println(student.toString());
-
             }
         } catch (SQLException ex) {
             Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -163,6 +162,6 @@ public class StudentDAO {
         finally {
             conn.close(rs, ps, connection);
         }
-        return null;
+        return student;
     }
 }
