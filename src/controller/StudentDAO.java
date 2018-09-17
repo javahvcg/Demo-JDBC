@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.DBConnection;
@@ -28,7 +29,8 @@ public class StudentDAO {
     ResultSet rs = null;
 
     public Student addNew(Student student) {
-
+//Insert dữ liệu thì nhớ Insert table chứa Primary key trước.
+//Sau đó mới Insert dữ liệu cho table chứa Foreign key
         DBConnection conn = new DBConnection();
         connection = conn.getConnection();
         try {
@@ -81,8 +83,7 @@ public class StudentDAO {
             }
         } catch (SQLException ex) {
             Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally {
+        } finally {
             conn.close(rs, ps, connection);
         }
         return list;
@@ -94,15 +95,74 @@ public class StudentDAO {
 //        Student student = new Student();
 //        dao.getAll();
 //    }
-    public boolean updateById() {
-        return false;
+    public boolean updateById(int id, String name, String dob) {
+        //Update 2 table có quan hệ thì phải lần lượt update từng cái
+        DBConnection conn = new DBConnection();
+        connection = conn.getConnection();
+        int result = 0;
+        String sql = "update student set student.name , dob where id=?";
+        id = new Scanner(System.in).nextInt();
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setString(2, dob);
+            result = ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            conn.close(rs, ps, connection);
+        }
+
+        return result > 0;
     }
 
-    public boolean deleteById() {
-        return false;
+    public boolean deleteById(int id) {
+        //Delete dữ liệu thì Delete dữ liệu trong table chứa Foreign key trước.
+        //Sau đó mới delete dữ liệu trong table chứa Primary key
+        DBConnection conn = new DBConnection();
+        connection = conn.getConnection();
+        int result = 0;
+        id = new Scanner(System.in).nextInt();
+        String sql = "delete from student where id=?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            conn.close(rs, ps, connection);
+        }
+
+        return result > 0;
     }
 
-    public Student getById(String id) {
+    public Student getById(int id) {
+        DBConnection conn = new DBConnection();
+        connection = conn.getConnection();
+        Student student = null;
+        String sql = "select * from student where id=?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int stId = rs.getInt("id");
+                int room_id = rs.getInt("room_id");
+                String name = rs.getString("name");
+                String dob = rs.getString("dob");
+                String clan = rs.getString("clan");
+                Room room = new Room(room_id, clan);
+                student = new Student(stId, name, dob, room);
+                System.out.println(student.toString());
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally {
+            conn.close(rs, ps, connection);
+        }
         return null;
     }
 }
