@@ -5,6 +5,8 @@
  */
 package entities;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author anhquan12
@@ -13,6 +15,7 @@ public class Room {
     private int room_id;
     private String clan;
     
+    private ArrayList<Student> list = new ArrayList<>();
     
     public Room(int room_id, String clan) {
         this.room_id = room_id;
@@ -22,7 +25,6 @@ public class Room {
     public Room(String clan) {
         this.clan = clan;
     }
-    
     
 
     public Room() {
@@ -36,9 +38,20 @@ public class Room {
         this.room_id = room_id;
     }
 
-
-    @Override
-    public String toString() {
-        return "Room{" + "room_id=" + room_id + ", clan=" + clan + '}';
+    public String getClan() {
+        return clan;
     }
+
+    public void setClan(String clan) {
+        this.clan = clan;
+    }
+
+    public ArrayList<Student> getList() {
+        return list;
+    }
+
+    public void setList(ArrayList<Student> list) {
+        this.list = list;
+    }
+
 }
